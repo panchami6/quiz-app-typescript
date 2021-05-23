@@ -26,10 +26,12 @@ export default function PlayQuiz() {
                 Choose other set
               </button>
             </Link>
+            <Link to = "/answers">
+            <button onClick = {() => quizDispatch({ type: "SHOW_ANSWERS" })}>Check Answers</button>
+            </Link>
           </div>
         ) : (
           <div className="quizCardOuter">
-            {/* {quizOne.map((quiz) => ( */}
             <div className="quizCard">
               <div className="questionCount">
                 <span>Question {quizState.initialQuestion + 1}</span>
@@ -58,7 +60,6 @@ export default function PlayQuiz() {
                 ))}
               </div>
             </div>
-            {/* )} */}
           </div>
         )}
       </div>

@@ -4,7 +4,8 @@ type Action =
   | { type: "RESET" }
   | { type: "NEXT_QUESTION"; payload: { isRight: boolean } }
   | { type: "SET_CURRENT_QUIZ"; payload: string }
-  | { type: "CHOOSE_OTHER_SET" };
+  | { type: "CHOOSE_OTHER_SET" }
+  | { type: "SHOW_ANSWERS"}
 
 export function quizReducer(state: QuizStateType, action: Action) {
   const { score, initialQuestion } = state;
@@ -51,6 +52,12 @@ export function quizReducer(state: QuizStateType, action: Action) {
         showScore: false,
         initialQuestion: 0
       };
+    case "SHOW_ANSWERS":
+      return{
+        ...state,
+        score: 0,
+        showScore: false,
+      }
 
     default:
       return state;

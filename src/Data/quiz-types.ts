@@ -1,12 +1,5 @@
 export type Option = {
-    /**
-     * Text to show the player
-     */
     text: string;
-  
-    /**
-     * For the right answer make this true
-     */
     isRight: boolean;
   };
   
@@ -20,4 +13,7 @@ export type Option = {
     quizName: string;
     id: number;
   };
+
+
+
   

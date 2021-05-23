@@ -5,12 +5,14 @@ import { useQuiz } from "../Context/quizContext";
 import ChoiceBro from "../Images/ChoiceBro.png";
 import Fitness from "../Images/Fitness.png";
 import HealthyMeal from "../Images/HealthyMeal.png";
+import { NavBar } from "./NavBar";
 
 export default function Home() {
   const { quizDispatch } = useQuiz();
 
   return (
     <div className = "home-page">
+      <NavBar />
       <div className = "header">
         <div className = "intro">
           <h1>Are You a Fitness Fanatic? <br /><span>Test your knowledge on Fitness and Nutrition</span></h1>
