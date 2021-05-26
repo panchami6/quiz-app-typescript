@@ -2,16 +2,19 @@ import '../App.css';
 import { quizOne } from "../Data/quizData";
 import { useQuiz } from "../Context/quizContext";
 import { Link } from "react-router-dom";
+import {useStyles} from "../theme";
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 
 export default function PlayQuiz() {
   const { quizState, quizDispatch } = useQuiz();
+  const classes = useStyles();
 
   return (
-    <div className="App">
-      <div>
+    <Box className={classes.playQuiz}>
         {quizState.initialQuestion + 1 > quizOne[0].questions.length ? (
-          <div className="quizCard">
-            <h2>You scored {quizState.score * 20} out of 100</h2>
+          <Box className={classes.quizCard}>
+            <Box className={classes.score}>You scored {quizState.score * 20} out of 100</Box>
             <button
               onClick={() => {
                 quizDispatch({ type: "RESET" });
@@ -29,24 +32,25 @@ export default function PlayQuiz() {
             <Link to = "/answers">
             <button onClick = {() => quizDispatch({ type: "SHOW_ANSWERS" })}>Check Answers</button>
             </Link>
-          </div>
+          </Box>
         ) : (
-          <div className="quizCardOuter">
-            <div className="quizCard">
-              <div className="questionCount">
-                <span>Question {quizState.initialQuestion + 1}</span>
-              </div>
-              <div>
+            <Box className={classes.quizCard}>
+              <Box className={classes.questionCount}>
+                Question {quizState.initialQuestion + 1}
+              </Box>
+              <Box className={classes.question}>
                 {
                   quizOne[quizState.id].questions[quizState.initialQuestion]
                     .question
                 }
-              </div>
-              <div>
+              </Box>
+              <Box>
                 {quizOne[quizState.id].questions[
                   quizState.initialQuestion
                 ].options.map((option) => (
-                  <button
+                  <Button
+                    style = {{margin : "0.5rem 0rem"}}
+                    variant="contained" color = "primary" 
                     key={option.text}
                     onClick={() =>
                       quizDispatch({
@@ -56,13 +60,11 @@ export default function PlayQuiz() {
                     }
                   >
                     {option.text}
-                  </button>
+                 </Button>
                 ))}
-              </div>
-            </div>
-          </div>
+              </Box>
+            </Box>
         )}
-      </div>
-    </div>
+      </Box>
   );
 }

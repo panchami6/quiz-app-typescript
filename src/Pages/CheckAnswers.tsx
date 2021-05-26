@@ -2,25 +2,30 @@ import {quizArray} from "../Data/answersData";
 import {useQuiz} from "../Context/quizContext";
 import "./home.css";
 import { Link } from "react-router-dom";
+import {useStyles} from "../theme";
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 
 export function CheckAnswers(){
     const { quizState, quizDispatch } = useQuiz();
+    const classes = useStyles();
 
     return(
-        <div>
+        <Box>
             {quizArray[quizState.id].questions.map((question) => (
-                <div className="answer-box">
-                    <div className = "question">Question: {question.quest}</div>
-                    <div className = "answer">Answer: {question.ans}</div>
-                </div>
+                <Box className={classes.answerBox}>
+                    <Box className = {classes.quest}>Question: {question.quest}</Box>
+                    <Box className = {classes.answer}>Answer: {question.ans}</Box>
+                </Box>
             ))}
-            <Link to="/">
-              <button className ="answer-btn"
+            <Link style={{textDecoration:"none"}} to="/">
+              <Button variant="contained" color = "primary"
+                style={{width:"15%", fontWeight:"bold"}}
                 onClick={() => quizDispatch({ type: "CHOOSE_OTHER_SET" })}
               >
                 Choose other set
-              </button>
+              </Button>
             </Link>
-        </div>
+        </Box>
     )
 }
