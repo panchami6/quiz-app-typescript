@@ -1,5 +1,6 @@
 import "./home.css";
-import { quizOne } from "../Data/quizData";
+import {useState, useEffect} from "react";
+import { Quiz } from "../Data/quiz-types";
 import { Link } from "react-router-dom";
 import { useQuiz } from "../Context/quizContext";
 import Fitness from "../Images/Fitness.png";
@@ -10,11 +11,29 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Image from "material-ui-image";
+import axios from "axios";
+
+export async function getQuizData(): Promise<Quiz[]>{
+  const response = await axios.get<Quiz[]>("https://quizbackend.panchami6.repl.co/quiz")
+
+  console.log(response.data)
+
+  return response.data
+}
+
 
 export default function Home() {
-  const { quizDispatch } = useQuiz();
-  const classes = useStyles(); 
+  
+  const [quiz, setQuiz] = useState<Quiz[] | null>(null)
+  useEffect(()=> {
+    (async function(){
+      const quiz = await getQuizData();
+      setQuiz(quiz)
+    })()
+  }, [])
 
+  const { quizDispatch } = useQuiz();
+  const classes = useStyles();
   return (
     <Box className = {classes.homePage}>
       <NavBar />
@@ -24,7 +43,7 @@ export default function Home() {
         Checkout the below quizes and have fun!
       </Box>
       <Box className={classes.quizChoices}>
-        {quizOne.map((genre) => (
+      {quiz && quiz.map((genre) => (
           <Box className={classes.choice}>
             <Typography variant="h5" style={{fontWeight:"bold"}} className={classes.quizName}>{genre.quizName}</Typography>
             <Image src={genre.quizName ==="Fitness" ? Fitness : HealthyMeal} imageStyle = {{width: 180, height: 200}} />
@@ -34,7 +53,7 @@ export default function Home() {
                 onClick={() =>
                   quizDispatch({
                     type: "SET_CURRENT_QUIZ",
-                    payload: genre.quizName
+                    payload: genre
                   })
                 }
               >
@@ -43,7 +62,10 @@ export default function Home() {
             </Link>
           </Box>
         ))}
+    
       </Box>
     </Box>
   );
 }
+
+

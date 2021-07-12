@@ -1,18 +1,22 @@
 import '../App.css';
-import { quizOne } from "../Data/quizData";
 import { useQuiz } from "../Context/quizContext";
 import { Link } from "react-router-dom";
 import {useStyles} from "../theme";
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import { NavBar } from "./NavBar";
 
 export default function PlayQuiz() {
+
   const { quizState, quizDispatch } = useQuiz();
+  const {genre} = quizState;
+  console.log(genre)
   const classes = useStyles();
 
-  return (
+  return ( 
     <Box className={classes.playQuiz}>
-        {quizState.initialQuestion + 1 > quizOne[0].questions.length ? (
+      <NavBar />
+        {genre && quizState.initialQuestion + 1 > genre.questions.length ? (
           <Box className={classes.quizCard}>
             <Box className={classes.score}>You scored {quizState.score * 20} out of 100</Box>
             <button
@@ -40,12 +44,12 @@ export default function PlayQuiz() {
               </Box>
               <Box className={classes.question}>
                 {
-                  quizOne[quizState.id].questions[quizState.initialQuestion]
+                  genre && genre.questions[quizState.initialQuestion]
                     .question
                 }
               </Box>
               <Box>
-                {quizOne[quizState.id].questions[
+                {genre&& genre.questions[
                   quizState.initialQuestion
                 ].options.map((option) => (
                   <Button
@@ -67,4 +71,5 @@ export default function PlayQuiz() {
         )}
       </Box>
   );
+
 }

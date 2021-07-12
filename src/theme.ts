@@ -66,6 +66,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     position: "absolute",
     minHeight: "250px",
+    width:"60%",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -85,8 +86,12 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
   },
   answerBox: {
-    margin: "1.5rem 17rem",
-    width: "60%",
+    display: "flex",
+    flexDirection:"column",
+    justifyContent:"center",
+    margin: "1rem auto",
+    // margin: "1.5rem 17rem",
+    width: "80%",
     border: "1px solid #ce8ed9",
     minHeight: "50px",
     backgroundColor:"#fff",
@@ -96,12 +101,12 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: "10px 10px 42px 0px rgba(0, 0, 0, 0.75)"
   },
   quest: {
-    color: "rgb(224, 18, 18)",
+    color: "#5e2a68",
     fontSize: "large",
     fontWeight: "bold",
   },
   answer: {
-    color: "rgb(15, 167, 15)",
+    color: "#A06AB4",
     fontSize: "large",
     paddingTop: "0.5rem"
   }

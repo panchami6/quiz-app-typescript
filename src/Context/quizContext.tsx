@@ -1,10 +1,13 @@
 import { createContext, useContext, useReducer, ReactNode } from "react";
+import { Quiz } from "../Data/quiz-types";
 import { quizReducer } from "../Reducer/QuizReducer";
 type StatusState = "starting" | "finished" | "reset";
+
 
 export type QuizStateType = {
   status: StatusState;
   score: number;
+  genre: Quiz | null;
   id: number;
   initialQuestion: number;
   showScore: boolean;
@@ -13,6 +16,7 @@ export type QuizStateType = {
 const initialQuizState: QuizStateType = {
   score: 0,
   id: 0,
+  genre: null,
   status: "starting",
   initialQuestion: 0,
   showScore: false

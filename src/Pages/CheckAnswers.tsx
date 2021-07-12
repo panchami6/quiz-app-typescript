@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import {useStyles} from "../theme";
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import { NavBar } from "./NavBar";
 
 export function CheckAnswers(){
     const { quizState, quizDispatch } = useQuiz();
@@ -12,6 +13,7 @@ export function CheckAnswers(){
 
     return(
         <Box>
+          <NavBar />
             {quizArray[quizState.id].questions.map((question) => (
                 <Box className={classes.answerBox}>
                     <Box className = {classes.quest}>Question: {question.quest}</Box>

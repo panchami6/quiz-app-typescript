@@ -6,7 +6,6 @@
 }
 
 .header{
-  /* margin-left: 10rem; */
   display: flex;
   justify-content: space-evenly;
 }
@@ -90,13 +89,13 @@
 }
 
 .answer-box .question{
-  color: rgb(224, 18, 18);
+  color: #5e2a68;
   font-size: large;
   font-weight: bold;
 }
 
 .answer-box .answer{
-  color: rgb(15, 167, 15);
+  color: #ce8ed9;
   font-size: large;
   padding-top: 0.5rem;
 }
