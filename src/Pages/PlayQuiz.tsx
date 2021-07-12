@@ -10,7 +10,6 @@ export default function PlayQuiz() {
 
   const { quizState, quizDispatch } = useQuiz();
   const {genre} = quizState;
-  console.log(genre)
   const classes = useStyles();
 
   return ( 

@@ -16,8 +16,6 @@ import axios from "axios";
 export async function getQuizData(): Promise<Quiz[]>{
   const response = await axios.get<Quiz[]>("https://quizbackend.panchami6.repl.co/quiz")
 
-  console.log(response.data)
-
   return response.data
 }
 
@@ -44,7 +42,7 @@ export default function Home() {
       </Box>
       <Box className={classes.quizChoices}>
       {quiz && quiz.map((genre) => (
-          <Box className={classes.choice}>
+          <Box key = {genre.id} className={classes.choice}>
             <Typography variant="h5" style={{fontWeight:"bold"}} className={classes.quizName}>{genre.quizName}</Typography>
             <Image src={genre.quizName ==="Fitness" ? Fitness : HealthyMeal} imageStyle = {{width: 180, height: 200}} />
             <Link style= {{textDecoration:"none"}} to={`/${genre.quizName}`}>
